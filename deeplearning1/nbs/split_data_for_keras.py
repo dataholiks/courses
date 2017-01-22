@@ -3,6 +3,11 @@ import os
 import numpy as np
 import zipfile
 
+# Global control params
+DOWNLOAD_PATH = "data/statefarm/"
+VALIDATION_PERCENT = 0.15
+NUM_SAMPLE_FILES = 10
+
 # Input =  kaggle image zip file 'imgs.zip'
 # Everytime we start fresh from unzipping. 
 # WARNING: First removes train/ and test/ if they already exist.
@@ -16,10 +21,6 @@ IMAGE_ZIP = DOWNLOAD_PATH+'imgs.zip'
 #data/statefarm/sample/valid/cx/  (10 random images from ../valid/cx are *copied* here)
 #data/statefarm/sample/test/   (10 random images from ../test are *copied* here)
 
-# Global control params
-DOWNLOAD_PATH = "data/statefarm/"
-VALIDATION_PERCENT = 0.15
-NUM_SAMPLE_FILES = 10
 
 def clean_directory(directory):
     if not os.path.exists(directory):
