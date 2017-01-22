@@ -130,6 +130,6 @@ def main():
     create_class_x_sample(test_unknown_dir, 'test')
     # Done restructuring the data.
 
-if __name__ == __main__:
+if __name__ == '__main__':
     main()
 
