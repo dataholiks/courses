@@ -97,6 +97,9 @@ class Vgg16():
     def finetune_1(self, batches):
         #RK: changes to tune for statefarm. 
         #in addition to the last layer, train the layer before in vgg16
+        # This one didn't work well at all. May be train more epochs? Too many parameter?
+        # Val set accuracy isn't good.. that means didn't converge or underfitting?
+        # underfitting unlikely, that means try more epochs shuffling data everytime.
         model = self.model
         model.pop()
         # -2 since the last two layers are now (Dense, Dropout). Train both. 
@@ -108,6 +111,7 @@ class Vgg16():
     def finetune(self, batches):
         #RK: changes to tune for statefarm. 
         #in addition to the last layer, replace the two layers before it (4k dense followed by dropout) 
+        # this showed promise. Try increasing Dense layer size.
         model = self.model
         model.pop()
         
@@ -117,7 +121,7 @@ class Vgg16():
         for layer in model.layers: layer.trainable=False
         
         #add a smaller dense layer followed by dropout
-        model.add(Dense(1024, activation='relu'))
+        model.add(Dense(2048, activation='relu'))
         model.add(Dropout(0.5))
         model.add(Dense(batches.nb_class, activation='softmax'))
         self.compile()
