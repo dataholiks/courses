@@ -94,10 +94,31 @@ class Vgg16():
         model.add(Dense(num, activation='softmax'))
         self.compile()
 
-    def finetune(self, batches):
+    def finetune_1(self, batches):
+        #RK: changes to tune for statefarm. 
+        #in addition to the last layer, train the layer before in vgg16
         model = self.model
         model.pop()
+        # -2 since the last two layers are now (Dense, Dropout). Train both. 
+        for layer in model.layers[0:-2]: layer.trainable=False
+
+        model.add(Dense(batches.nb_class, activation='softmax'))
+        self.compile()
+        
+    def finetune(self, batches):
+        #RK: changes to tune for statefarm. 
+        #in addition to the last layer, replace the two layers before it (4k dense followed by dropout) 
+        model = self.model
+        model.pop()
+        
+        #remove dropout and the 4k dense layer
+        model.pop()
+        model.pop()
         for layer in model.layers: layer.trainable=False
+        
+        #add a smaller dense layer followed by dropout
+        model.add(Dense(1024, activation='relu'))
+        model.add(Dropout(0.5))
         model.add(Dense(batches.nb_class, activation='softmax'))
         self.compile()
 
