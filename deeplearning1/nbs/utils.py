@@ -87,8 +87,9 @@ def do_clip(arr, mx):
 
 def get_batches(dirname, gen=image.ImageDataGenerator(), shuffle=True, batch_size=4, class_mode='categorical',
                 target_size=(224,224)):
-    return gen.flow_from_directory(dirname, target_size=target_size,
+    generator_flow = gen.flow_from_directory(dirname, target_size=target_size,
             class_mode=class_mode, shuffle=shuffle, batch_size=batch_size)
+    return generator_flow
 
 
 def onehot(x):
