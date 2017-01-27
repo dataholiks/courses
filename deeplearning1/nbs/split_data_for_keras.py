@@ -1,3 +1,4 @@
+import argparse
 import glob
 import os
 import numpy as np
@@ -6,8 +7,9 @@ import zipfile
 # Global control params
 DOWNLOAD_PATH = "data/statefarm/"
 VALIDATION_PERCENT = 0.15
-NUM_SAMPLE_TRAIN_FILES = 1000
-NUM_SAMPLE_VALID_FILES = 500
+NUM_SAMPLE_TRAIN_FILES = 10
+NUM_SAMPLE_VALID_FILES = 5
+NUM_SAMPLE_TEST_FILES = 5
 
 # Input =  kaggle image zip file 'imgs.zip'
 # Everytime we start fresh from unzipping. 
@@ -128,9 +130,18 @@ def main():
         create_class_x_sample(valid_class_path, 'valid', NUM_SAMPLE_VALID_FILES)
 
     # Move some images to sample/test
-    create_class_x_sample(test_unknown_dir, 'test')
+    create_class_x_sample(test_unknown_dir, 'test', NUM_SAMPLE_TEST_FILES)
     # Done restructuring the data.
 
-if __name__ == '__main__':
-    main()
+# def parse_arguments():
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('instance', type=str, help='Specify whether dataholiks t2 or p2 instance')
+#     parser.add_argument('source', type=str, help='Specify source file on your instance')
+#     parser.add_argument('destination', type=str, help='Specify destination file on your local computer')
+# 
+#     args = parser.parse_args()
+#     return args
 
+if __name__ == '__main__':
+    # args = parse_arguments()  # parse command's arguments
+    main()
