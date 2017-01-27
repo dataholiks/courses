@@ -7,9 +7,9 @@ import zipfile
 # Global control params
 DOWNLOAD_PATH = "data/statefarm/"
 VALIDATION_PERCENT = 0.15
-NUM_SAMPLE_TRAIN_FILES = 10
-NUM_SAMPLE_VALID_FILES = 5
-NUM_SAMPLE_TEST_FILES = 5
+NUM_SAMPLE_TRAIN_FILES = 200
+NUM_SAMPLE_VALID_FILES = 100
+NUM_SAMPLE_TEST_FILES = 50
 
 # Input =  kaggle image zip file 'imgs.zip'
 # Everytime we start fresh from unzipping. 
