@@ -109,9 +109,9 @@ def main():
     # move unknown into test/
     temp_unknown = [x + '/' for x in test_dir.split('/')[0:-2]]
     temp_unknown = ''.join(temp_unknown)+'unknown'
-    os.system('mv {} {}'.format(test_dir, temp_unkown))
+    os.system('mv {} {}'.format(test_dir, temp_unknown))
     os.system('mkdir {}'.format(test_dir))
-    os.system('mv {} {}'.format(temp_unkown, test_dir))
+    os.system('mv {} {}'.format(temp_unknown, test_dir))
 
     print('Moving files ...')
     # Move a fraction of training files to valid direc. 
