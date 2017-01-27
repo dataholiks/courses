@@ -6,7 +6,8 @@ import zipfile
 # Global control params
 DOWNLOAD_PATH = "data/statefarm/"
 VALIDATION_PERCENT = 0.15
-NUM_SAMPLE_FILES = 10
+NUM_SAMPLE_TRAIN_FILES = 1000
+NUM_SAMPLE_VALID_FILES = 500
 
 # Input =  kaggle image zip file 'imgs.zip'
 # Everytime we start fresh from unzipping. 
@@ -41,10 +42,10 @@ def create_class_x_valid_from_training(training_class_path):
         valid_file = training_file.replace('train','valid')
         os.system('mv -f ' + training_file + ' ' + valid_file)
 
-def create_class_x_sample(class_path, sub_type):
+def create_class_x_sample(class_path, sub_type, n_files):
     class_files = glob.glob(class_path+'/*')
     num_files = len(class_files)
-    files_idxs_to_move = np.random.randint(0, num_files, NUM_SAMPLE_FILES)
+    files_idxs_to_move = np.random.randint(0, num_files, n_files)
     for idx in files_idxs_to_move:
         source_file = class_files[idx]
         dest_file = source_file.replace(sub_type, 'sample/' + sub_type)
@@ -123,8 +124,8 @@ def main():
         
         # for this class, move from train/cx to sample/train/cx .
         # from valid/cx to sample/valid/cx.
-        create_class_x_sample(training_class_path, 'train')
-        create_class_x_sample(valid_class_path, 'valid')
+        create_class_x_sample(training_class_path, 'train', NUM_SAMPLE_TRAIN_FILES)
+        create_class_x_sample(valid_class_path, 'valid', NUM_SAMPLE_VALID_FILES)
 
     # Move some images to sample/test
     create_class_x_sample(test_unknown_dir, 'test')
