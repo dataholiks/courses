@@ -100,6 +100,7 @@ class Vgg16():
         # This one didn't work well at all. May be train more epochs? Too many parameter?
         # Val set accuracy isn't good.. that means didn't converge or underfitting?
         # underfitting unlikely, that means try more epochs shuffling data everytime.
+        # saved weights in _3 for this
         model = self.model
         model.pop()
         # -2 since the last two layers are now (Dense, Dropout). Train both. 
@@ -129,6 +130,7 @@ class Vgg16():
         #RK: changes to tune for statefarm. 
         #in addition to the last layer, replace the two layers before it (4k dense followed by dropout) 
         # this showed promise. Try increasing Dense layer size.
+        # saved weights in _2 for this
         model = self.model
         model.pop()
         
