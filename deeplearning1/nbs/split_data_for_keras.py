@@ -77,7 +77,7 @@ def main():
     os.system('rm -f -r ' + train_dir)
     os.system('rm -f -r ' + test_dir)
 
-    print('Unzipping image files ...')
+    print('Unzipping image files ...this may take a while')
     # Extract images from zip file
     with zipfile.ZipFile(IMAGE_ZIP, "r") as zip_ref:
         zip_ref.extractall(DOWNLOAD_PATH)
