@@ -13,13 +13,14 @@ import os
 # import subprocess
 PEM_KEY = '~/AWS/dh-aws-key.pem'
 EC2_USERNAME = 'ubuntu'
-EC2_PUBLIC_DNS = 'ec2-35-165-195-150.us-west-2.compute.amazonaws.com'
-
+EC2_T2_PUBLIC_DNS = 'ec2-35-161-1-194.us-west-2.compute.amazonaws.com'
+EC2_P2_PUBLIC_DNS = 'ec2-35-165-195-150.us-west-2.compute.amazonaws.com'
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('source', type=str, help='Specify source file')
-    parser.add_argument('destination', type=str, help='Specify destination file')
+    parser.add_argument('instance', type=str, help='Specify whether dataholiks t2 or p2 instance')
+    parser.add_argument('source', type=str, help='Specify source file on your local computer')
+    parser.add_argument('destination', type=str, help='Specify destination file on the your instance ')
 
     args = parser.parse_args()
     return args
@@ -27,7 +28,15 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()  # parse command's arguments
-    full_destination = EC2_USERNAME + '@' + EC2_PUBLIC_DNS + ':' + args.destination
+
+    if args.instance == 't2':
+        ec2_public_dns = EC2_T2_PUBLIC_DNS
+    elif args.instance == 'p2':
+        ec2_public_dns = EC2_P2_PUBLIC_DNS
+    else:
+        raise('Unknown instance')
+
+    full_destination = EC2_USERNAME + '@' + ec2_public_dns + ':' + args.destination
     exec_string = 'scp -r -i ' + PEM_KEY + ' ' + args.source + ' ' + full_destination
 
     # RK: TODO
