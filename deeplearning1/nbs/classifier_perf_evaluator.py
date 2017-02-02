@@ -43,5 +43,5 @@ class ClassifierPerformanceEvaluator():
         filenames = self.filenames
         predicted_probas = self.predicted_probas
         predicted_classes = self.predicted_classes
-        plots([image.load_img(filenames[i]) for i in idxs], titles=predicted_probas[idxs, predicted_classes[idxs]])
+        plots([image.load_img(filenames[i]) for i in idxs], titles=None)
 
