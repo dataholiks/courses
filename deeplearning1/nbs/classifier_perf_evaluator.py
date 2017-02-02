@@ -12,7 +12,10 @@ class ClassifierPerformanceEvaluator():
         self.grnd_truth = grnd_truth
         self.predicted_probas = predicted_probas
         self.filenames = filenames
-        self.predicted_classes = predicted_probas.max(axis=1)
+
+        # predicted class = class with maximum probability
+        self.predicted_classes = predicted_probas.argmax(axis=1)
+        self.predicted_class_probas = predicted_probas.max(axis=1)
 
     def confusion_matrix(self, plot=True):
         """
@@ -25,6 +28,7 @@ class ClassifierPerformanceEvaluator():
         :param n: Number of correct random predictions
         :return : index with n elements where predictions are accurate
         """
+        # correct_idxs is tuple, correct_idxs[0] contains indices
         correct_idxs = np.where(self.predicted_classes == self.grnd_truth)
         return np.random.choice(correct_idxs[0], n, replace=False)
 
@@ -41,7 +45,5 @@ class ClassifierPerformanceEvaluator():
         :param idx: idx of images to plot
         """
         filenames = self.filenames
-        predicted_probas = self.predicted_probas
-        predicted_classes = self.predicted_classes
-        plots([image.load_img(filenames[i]) for i in idxs], titles=None)
+        plots([image.load_img(filenames[i]) for i in idxs], titles=self.predicted_class_probas[idxs])
 
