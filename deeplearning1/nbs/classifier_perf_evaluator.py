@@ -1,5 +1,5 @@
 from keras.preprocessing import image
-from skealrn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix
 from utils import plots
 class ClassifierPerformanceEvaluator():
     def __init__(self, grnd_truth, predicted_probas, filenames):
