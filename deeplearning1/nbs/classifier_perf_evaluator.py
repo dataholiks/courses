@@ -1,4 +1,5 @@
 from keras.preprocessing import image
+import numpy as np
 from sklearn.metrics import confusion_matrix
 from utils import plots
 class ClassifierPerformanceEvaluator():
