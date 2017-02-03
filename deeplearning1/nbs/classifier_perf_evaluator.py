@@ -65,7 +65,7 @@ class ClassifierPerformanceEvaluator():
         filenames = self.filenames
         titles = np.core.defchararray.add(np.array(['pred.p ']), self.predicted_class_probas[idxs].astype(str))
         pred_cls = np.core.defchararray.add(np.array(['p.cls ']), self.predicted_classes[idxs].astype(str))
-        corr_cls = np.core.defchararray.add(np.array(['c.cls ']), self.grnd_truth[idxs].astype(str))
+        corr_cls = np.core.defchararray.add(np.array([' c.cls ']), self.grnd_truth[idxs].astype(str))
         xlabels = np.core.defchararray.add(pred_cls, corr_cls)
 
         plots([image.load_img(filenames[i]) for i in idxs], titles=titles, xlabels=xlabels)
