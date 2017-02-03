@@ -67,6 +67,6 @@ class ClassifierPerformanceEvaluator():
         xlabels = np.core.defchararray.add(np.array(['predicted class ']), self.predicted_classes[idxs].astype(str))
         ylabels = np.core.defchararray.add(np.array(['actual class ']), self.grnd_truth[idxs].astype(str))
 
-        plots([image.load_img(filenames[i]) for i in idxs], titles=,
+        plots([image.load_img(filenames[i]) for i in idxs], titles=titles,
               xlabels=xlabels, ylabels=ylabels)
 
