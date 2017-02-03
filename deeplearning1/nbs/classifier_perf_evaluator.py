@@ -23,19 +23,36 @@ class ClassifierPerformanceEvaluator():
         """
         return confusion_matrix(self.grnd_truth, self.predicted_classes)
 
+    def get_n_random_incorrect_preds(self, n):
+        """
+        :param n: Number of correct random predictions
+        :return : index with n elements where predictions are incorrect
+        """
+        # correct_idxs is tuple, correct_idxs[0] contains indices
+        idxs = np.where(self.predicted_classes != self.grnd_truth)
+        return np.random.choice(idxs[0], n, replace=False)
+
     def get_n_random_correct_preds(self, n):
         """
         :param n: Number of correct random predictions
-        :return : index with n elements where predictions are accurate
+        :return : index with n elements where predictions are correct
         """
         # correct_idxs is tuple, correct_idxs[0] contains indices
-        correct_idxs = np.where(self.predicted_classes == self.grnd_truth)
-        return np.random.choice(correct_idxs[0], n, replace=False)
+        idxs = np.where(self.predicted_classes == self.grnd_truth)
+        return np.random.choice(idxs[0], n, replace=False)
+
+    def display_n_random_incorrect_preds(self, n):
+        """
+        :param n: Number of correct random predictions
+        :return : None. Display n incorrectly classified images
+        """
+        idxs = self.get_n_random_incorrect_preds(n)
+        self._display_idxs(idxs)
 
     def display_n_random_correct_preds(self, n):
         """
         :param n: Number of correct random predictions
-        :return : index with n elements where predictions are accurate
+        :return : None. Display n correctly classified images
         """
         idxs = self.get_n_random_correct_preds(n)
         self._display_idxs(idxs)
@@ -43,6 +60,7 @@ class ClassifierPerformanceEvaluator():
     def _display_idxs(self, idxs):
         """
         :param idx: idx of images to plot
+        :return : None. Display images in idxs
         """
         filenames = self.filenames
         plots([image.load_img(filenames[i]) for i in idxs], titles=self.predicted_class_probas[idxs])
