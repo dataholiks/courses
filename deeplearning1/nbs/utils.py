@@ -73,6 +73,8 @@ def plots(ims, figsize=(12,6), rows=1, interp=False, titles=None, xlabels=None, 
         if (ims.shape[-1] != 3):
             ims = ims.transpose((0,2,3,1))
     f = plt.figure(figsize=figsize)
+    print(xlabels)
+    print(ylabels)
     for i in range(len(ims)):
         sp = f.add_subplot(rows, len(ims)//rows, i+1)
 
@@ -80,9 +82,9 @@ def plots(ims, figsize=(12,6), rows=1, interp=False, titles=None, xlabels=None, 
         if titles is not None:
             sp.set_title(titles[i], fontsize=18)
         if xlabels is not None:
-            sp.set_xlabel(xlabels[i], fontsize=12)
+            sp.set_xlabel(xlabels[i], fontsize=18)
         if ylabels is not None:
-            sp.set_ylabel(ylabels[i], fontsize=12)
+            sp.set_ylabel(ylabels[i], fontsize=18)
 
         plt.imshow(ims[i], interpolation=None if interp else 'none')
 
