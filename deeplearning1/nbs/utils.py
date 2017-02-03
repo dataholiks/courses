@@ -79,9 +79,9 @@ def plots(ims, figsize=(12,6), rows=1, interp=False, titles=None, xlabels=None, 
         # Add titles and x/y labels
         if titles is not None:
             sp.set_title(titles[i], fontsize=18)
-        if predicted_cls is not None:
+        if xlabels is not None:
             sp.set_xlabel(xlabels[i], fontsize=12)
-        if actual_cls is not None:
+        if ylabels is not None:
             sp.set_ylabel(ylabels[i], fontsize=12)
 
         plt.imshow(ims[i], interpolation=None if interp else 'none')
