@@ -63,9 +63,9 @@ class ClassifierPerformanceEvaluator():
         :return : None. Display images in idxs
         """
         filenames = self.filenames
-        titles = np.core.defchararray.add(np.array(['predicted prob ']), self.predicted_class_probas[idxs].astype(str))
-        xlabels = np.core.defchararray.add(np.array(['predicted class ']), self.predicted_classes[idxs].astype(str))
-        ylabels = np.core.defchararray.add(np.array(['actual class ']), self.grnd_truth[idxs].astype(str))
+        titles = np.core.defchararray.add(np.array(['pred.p ']), self.predicted_class_probas[idxs].astype(str))
+        xlabels = np.core.defchararray.add(np.array(['pred.cls ']), self.predicted_classes[idxs].astype(str))
+        ylabels = np.core.defchararray.add(np.array(['corr.cls ']), self.grnd_truth[idxs].astype(str))
 
         plots([image.load_img(filenames[i]) for i in idxs], titles=titles,
               xlabels=xlabels, ylabels=ylabels)

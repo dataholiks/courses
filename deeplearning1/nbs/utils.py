@@ -73,8 +73,6 @@ def plots(ims, figsize=(12,6), rows=1, interp=False, titles=None, xlabels=None, 
         if (ims.shape[-1] != 3):
             ims = ims.transpose((0,2,3,1))
     f = plt.figure(figsize=figsize)
-    print(xlabels)
-    print(ylabels)
     for i in range(len(ims)):
         sp = f.add_subplot(rows, len(ims)//rows, i+1)
 
